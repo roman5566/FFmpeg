@@ -92,8 +92,11 @@ ffplay.o: CFLAGS += $(SDL_CFLAGS)
 ffplay_g$(EXESUF): FF_EXTRALIBS += $(SDL_LIBS)
 ffserver_g$(EXESUF): LDFLAGS += $(FFSERVERLDFLAGS)
 
-%$(PROGSSUF)_g$(EXESUF): %.o cmdutils.o $(FF_DEP_LIBS)
-	$(LD) $(LDFLAGS) -o $@ $< cmdutils.o $(FF_EXTRALIBS)
+%$(PROGSSUF)_rc.o: %$(PROGSSUF).rc
+	windres -I$(SRC_PATH) -o $@ $<
+
+%$(PROGSSUF)_g$(EXESUF): %.o cmdutils.o %$(PROGSSUF)_rc.o $(FF_DEP_LIBS)
+	$(LD) $(LDFLAGS) -o $@ $^ $(FF_EXTRALIBS)
 
 OBJDIRS += tools
 
