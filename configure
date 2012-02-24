@@ -2949,7 +2949,6 @@ die_license_disabled gpl libxvid
 die_license_disabled gpl x11grab
 
 die_license_disabled nonfree libaacplus
-die_license_disabled nonfree libfaac
 enabled gpl && die_license_disabled_gpl nonfree libfdk_aac
 enabled gpl && die_license_disabled_gpl nonfree openssl
 
@@ -3338,7 +3337,7 @@ enabled libcelt    && require libcelt celt/celt.h celt_decode -lcelt0 &&
                       { check_lib celt/celt.h celt_decoder_create_custom -lcelt0 ||
                         die "ERROR: libcelt version must be >= 0.11.0."; }
 enabled libcaca    && require_pkg_config caca caca.h caca_create_canvas
-enabled libfaac    && require2 libfaac "stdint.h faac.h" faacEncGetVersion -lfaac
+enabled libfaac    && check_header faac.h
 enabled libfdk_aac && require  libfdk_aac fdk-aac/aacenc_lib.h aacEncOpen -lfdk-aac
 enabled libfreetype && require_pkg_config freetype2 "ft2build.h freetype/freetype.h" FT_Init_FreeType
 enabled libgsm     && require  libgsm gsm/gsm.h gsm_create -lgsm
