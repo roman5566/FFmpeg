@@ -3368,7 +3368,7 @@ enabled libvpx     && {
                                 die "ERROR: libvpx decoder version must be >=0.9.1"; }
     enabled libvpx_encoder && { check_lib2 "vpx/vpx_encoder.h vpx/vp8cx.h" "vpx_codec_enc_init_ver VP8E_SET_MAX_INTRA_BITRATE_PCT" -lvpx ||
                                 die "ERROR: libvpx encoder version must be >=0.9.7"; } }
-enabled libx264    && require  libx264 x264.h x264_encoder_encode -lx264 &&
+enabled libx264    && require  libx264 x264.h x264_encoder_encode -lx264 -lm -lpthread &&
                       { check_cpp_condition x264.h "X264_BUILD >= 118" ||
                         die "ERROR: libx264 version must be >= 0.118."; }
 enabled libxavs    && require  libxavs xavs.h xavs_encoder_encode -lxavs
